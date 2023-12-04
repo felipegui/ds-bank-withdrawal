@@ -32,12 +32,10 @@ public class Program {
 		System.out.print("Enter a withdrawal amount: ");
 		double amount = sc.nextDouble();
 		
-		if (amount > acc.getWithdrawLimit()) {
-			System.out.println("Withdrawal erro: Amount exceeds withdrawal limit.");
-		} else if (amount > acc.getBalance()) {
-			System.out.println("Withdrawal erro: Insufficient funds.");
-		}
-		else {
+		String error = acc.validateWithdraw(amount);
+		if (error != null) {
+			System.out.println(error);
+		} else {
 			acc.withdraw(amount);
 			
 			System.out.printf("New balance: %.2f", acc.getBalance());
